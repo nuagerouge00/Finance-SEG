@@ -1,0 +1,19 @@
+site_name: Finance SEG
+site_url: https://nuagerouge00.github.io/finance-SEG/
+
+theme:
+  name: material
+  language: fr
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+
+markdown_extensions:
+  - md_in_html
+  - attr_list
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/custom.css
