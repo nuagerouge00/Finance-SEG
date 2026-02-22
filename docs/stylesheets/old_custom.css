@@ -1,0 +1,253 @@
+/* Dans cette feuille de style on impose des styles qui ecrasent mkdoc
+Comme j'utilise bcp la fonction <details> qui permet de faire des blocs dépliables
+il faut definir les parametres pour body et pour details
+*/
+
+/*===============================================
+   POLICE
+==================================================*/
+/* Option choisie ci dessous une police système — style moderne type Claude/interface web */
+/* c'est une liste de priorité : 
+les 3 premières entre "" sont chargées depuis internet, 
+et les dernières sont en secours dans le systeme */
+
+
+body {
+  font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+
+html {
+  font-size: 100% !important;
+}
+
+/* Police pour l'interieur des details */
+
+/* Police dans details */
+.md-typeset details,
+.md-typeset details p,
+.md-typeset details li,
+.md-typeset details ul,
+.md-typeset details ol,
+.md-typeset details summary {
+  font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+
+
+
+/* on essaie de forcer mais cela ne fonctionne pas */
+/*
+details,
+details p,
+details li,
+details ul,
+details ol,
+details summary,
+details h1,
+details h2,
+details h3,
+details h4,
+details h5,
+details h6 {
+  font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+*/
+
+/* Option commentée ci dessous : inherit — garde la police de Material (désactivée)
+details * {
+  font-family: inherit !important;
+} */
+
+
+/* ============================================
+   TYPOGRAPHIE DES TITRES H1 à H6
+   ============================================ */
+
+h1 {
+  color: #2563eb !important;
+  font-size: 2em !important;
+  font-weight: 700 !important;
+}
+
+h2 {
+  color: #16a34a !important;
+  font-size: 1.6em !important;
+  font-weight: 700 !important;
+}
+
+h3 {
+  color: #dc2626 !important;
+  font-size: 1.35em !important;
+  font-weight: 700 !important;
+}
+
+h4 {
+  color: #ea580c !important;
+  font-size: 1.15em !important;
+  font-weight: 700 !important;
+}
+
+h5 {
+  color: #ca8a04 !important;
+  font-size: 1em !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+}
+
+h6 {
+  color: #92400e !important;
+  font-size: 0.9em !important;
+  font-weight: normal !important;
+  font-style: italic !important;
+}
+
+
+/* ============================================
+   COULEUR DES BLOCS DEPLIABLES PAR NIVEAU DE TITRE
+   ============================================ */
+
+details {
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 1em 0;
+  border: none;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.3em 0;
+}
+
+/* Niveau 1 — Bleu */
+details.niveau1 {
+  background-color: #dbeafe;
+  border-left: 4px solid #2563eb;
+}
+
+/* Niveau 2 — Vert */
+details.niveau2 {
+  background-color: #dcfce7;
+  border-left: 4px solid #16a34a;
+}
+
+/* Niveau 3 — Rouge doux */
+details.niveau3 {
+  background-color: #fee2e2;
+  border-left: 4px solid #dc2626;
+}
+
+/* Niveau 4 — Orange doux */
+details.niveau4 {
+  background-color: #ffedd5;
+  border-left: 4px solid #ea580c;
+}
+
+/* Niveau 5 — Or */
+details.niveau5 {
+  background-color: #fef9c3;
+  border-left: 4px solid #ca8a04;
+}
+
+/* Niveau 6 — Marron */
+details.niveau6 {
+  background-color: #f5f0eb;
+  border-left: 4px solid #92400e;
+}
+
+/* ============================================
+   TYPOGRAPHIE INTERIEURE DES DETAILS
+   ============================================ */
+
+details p {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+details ul {
+  display: block !important;
+  list-style-type: disc !important;
+  padding-left: 2em !important;
+  margin: 0.5em 0 !important;
+}
+
+details ol {
+  display: block !important;
+  list-style-type: decimal !important;
+  padding-left: 2em !important;
+  margin: 0.5em 0 !important;
+}
+
+details ul li,
+details ol li {
+  display: list-item !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  margin: 0.3em 0 !important;
+}
+
+
+/* ============================================
+   COMPACITE — INTERLIGNES ET LISTES
+   ============================================ */
+
+/* Espacement général des paragraphes */
+p {
+  margin-top: 0.4em !important;
+  margin-bottom: 0.4em !important;
+  line-height: 1.5 !important;
+}
+
+/* Réduction espace avant/après les listes */
+ul, ol {
+  margin-top: 0.3em !important;
+  margin-bottom: 0.3em !important;
+}
+
+/* Réduction espace entre les items de liste */
+ul li, ol li {
+  margin-top: 0.1em !important;
+  margin-bottom: 0.1em !important;
+  line-height: 1.5 !important;
+}
+
+/* Même chose à l'intérieur des details */
+/* solution qui n'a pas fonctionné*
+details p {
+  margin-top: 0.4em !important;
+  margin-bottom: 0.4em !important;
+  line-height: 1.5 !important;
+}
+
+details ul, details ol {
+  margin-top: 0.3em !important;
+  margin-bottom: 0.3em !important;
+}
+
+details ul li, details ol li {
+  margin-top: 0.1em !important;
+  margin-bottom: 0.1em !important;
+  line-height: 1.5 !important;
+}
+  */
+
+/* Compacité dans details */
+.md-typeset details p,
+.md-typeset details li,
+.md-typeset details ul,
+.md-typeset details ol {
+  margin-top: 0.1em !important;
+  margin-bottom: 0.1em !important;
+  line-height: 1.5 !important;
+}
+
+
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+.md-typeset .admonition li,
+.md-typeset details li {
+  margin-bottom: 0.1em !important;
+}
