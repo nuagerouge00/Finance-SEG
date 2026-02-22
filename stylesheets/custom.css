@@ -1,0 +1,399 @@
+/*
+=================================================================
+  CUSTOM.CSS — Finance SEG
+  Feuille de style pour MkDocs avec thème Material
+=================================================================
+
+  CONTEXTE
+  --------
+  Material for MkDocs applique ses propres styles très spécifiques
+  qui écrasent les CSS simples. Pour les surcharger il faut :
+  1. Utiliser ses propres sélecteurs (.md-typeset, .md-admonition...)
+  2. Ajouter !important sur les propriétés critiques
+  3. Cibler html{} pour la taille de base (pas body{})
+
+  GLOSSAIRE DES SELECTEURS CSS UTILISES ICI
+  ------------------------------------------
+  body        = tout le contenu de la page
+  html        = l'élément racine, parent de body — c'est ici que
+                Material fixe la taille de base à 125%
+  p           = paragraphe (balise <p> en HTML)
+  ul          = liste non ordonnée avec puces (unordered list)
+  ol          = liste ordonnée numérotée (ordered list)
+  li          = élément d'une liste (list item) — les <li> sont
+                les enfants de <ul> ou <ol>
+  h1...h6     = titres de niveau 1 à 6 (headings)
+  details     = bloc dépliable HTML5
+  summary     = titre cliquable du bloc details
+  .md-typeset = classe CSS que Material applique à toute la zone
+                de contenu — c'est le sélecteur le plus puissant
+                pour surcharger les styles de Material
+  .md-typeset .admonition = les encadrés spéciaux de Material
+                (notes, warnings...) — Material traite les
+                <details> exactement comme des admonitions,
+                d'où les problèmes de taille de police
+
+=================================================================
+*/
+
+
+/* ===============================================================
+   1. TAILLE DE BASE
+   ===============================================================
+   Material force html à 125% (voire 137.5% sur grands écrans)
+   ce qui gonfle tout. On remet à 100% pour une taille normale.
+   IMPORTANT : agir sur html{} et non body{} car c'est là que
+   Material définit cette valeur.
+*/
+
+html {
+  font-size: 100% !important;
+}
+
+
+/* ===============================================================
+   2. POLICE
+   ===============================================================
+   font-family accepte une liste de priorité :
+   - Le navigateur essaie la première police, si indisponible
+     il passe à la suivante, etc.
+   - Les polices entre guillemets sont des noms exacts
+   - sans-serif à la fin est un générique de secours universel
+
+   "Inter" et "Segoe UI" sont des polices modernes installées
+   sur la plupart des systèmes récents (Linux, Windows, Mac).
+   "Helvetica Neue" est le secours Mac/iOS.
+   Arial est le secours universel Windows/Linux.
+
+   NOTE : la police à l'intérieur des <details> ne s'hérite pas
+   automatiquement depuis body{} à cause de Material — il faut
+   la redéfinir explicitement avec .md-typeset details.
+*/
+
+body {
+  font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Force la même police à l'intérieur des blocs dépliables */
+.md-typeset details,
+.md-typeset details p,
+.md-typeset details li,
+.md-typeset details ul,
+.md-typeset details ol,
+.md-typeset details summary {
+  font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/*
+  Tentatives qui n'ont PAS fonctionné (conservées pour mémoire) :
+
+  details * { font-family: inherit !important; }
+  — le sélecteur * (étoile = tous les enfants) est ignoré par Material
+
+  details, details p, details li ... { font-family: ...; }
+  — sans le préfixe .md-typeset, Material est plus fort
+
+  La solution qui fonctionne : préfixer avec .md-typeset
+*/
+
+
+/* ===============================================================
+   3. TITRES H1 À H6 — couleur, taille, graisse
+   ===============================================================
+   Les couleurs correspondent aux niveaux des blocs <details>
+   pour une cohérence visuelle entre titres et blocs.
+
+   font-weight: 700 = gras (bold). Les valeurs vont de 100
+   (très fin) à 900 (très gras). 400 = normal, 700 = gras.
+
+   font-size en em = relatif à la taille du parent.
+   Ici html = 100% donc 1em ≈ 16px sur la plupart des navigateurs.
+
+   !important nécessaire car Material définit ses propres tailles
+   de titres avec une priorité élevée.
+*/
+
+h1 {
+  color: #2563eb !important;   /* Bleu */
+  font-size: 2em !important;
+  font-weight: 700 !important;
+}
+
+h2 {
+  color: #16a34a !important;   /* Vert */
+  font-size: 1.6em !important;
+  font-weight: 700 !important;
+}
+
+h3 {
+  color: #dc2626 !important;   /* Rouge doux */
+  font-size: 1.35em !important;
+  font-weight: 700 !important;
+}
+
+h4 {
+  color: #ea580c !important;   /* Orange doux */
+  font-size: 1.15em !important;
+  font-weight: 700 !important;
+}
+
+h5 {
+  color: #ca8a04 !important;   /* Or */
+  font-size: 1em !important;
+  font-weight: 700 !important;
+  font-style: italic !important;
+}
+
+h6 {
+  color: #92400e !important;   /* Marron */
+  font-size: 0.9em !important;
+  font-weight: normal !important;
+  font-style: italic !important;
+}
+
+
+/* ===============================================================
+   4. COMPACITÉ — espacement des paragraphes et listes
+   ===============================================================
+   Material laisse beaucoup d'espace entre les éléments.
+   On réduit les marges pour un rendu plus dense, adapté à un
+   contenu riche avec beaucoup de listes.
+
+   margin-top/bottom = espace au-dessus et en-dessous
+   line-height = interligne (1.5 = 1.5x la taille de la police)
+
+   Pour body{} : les sélecteurs simples suffisent.
+   Pour details{} : il faut préfixer avec .md-typeset (voir note
+   dans section Police).
+*/
+
+/* Paragraphes hors details */
+p {
+  margin-top: 0.4em !important;
+  margin-bottom: 0.4em !important;
+  line-height: 1.5 !important;
+}
+
+/* Listes hors details */
+ul, ol {
+  margin-top: 0.3em !important;
+  margin-bottom: 0.3em !important;
+}
+
+ul li, ol li {
+  margin-top: 0.1em !important;
+  margin-bottom: 0.1em !important;
+  line-height: 1.5 !important;
+}
+
+/* Paragraphes et listes dans details */
+.md-typeset details p,
+.md-typeset details li,
+.md-typeset details ul,
+.md-typeset details ol {
+  margin-top: 0.1em !important;
+  margin-bottom: 0.1em !important;
+  line-height: 1.5 !important;
+}
+
+.md-typeset .admonition li,
+.md-typeset details li {
+  margin-bottom: 0.1em !important;
+}
+
+
+/* ===============================================================
+   5. TAILLE DE POLICE DANS LES DETAILS
+   ===============================================================
+   Problème clé : Material force font-size: .64rem sur les
+   <details> via ce sélecteur dans son propre CSS :
+     .md-typeset .admonition, .md-typeset details { font-size: .64rem }
+   Il traite les <details> exactement comme ses "admonitions"
+   (encadrés Note/Warning/etc.).
+
+   Solution : surcharger avec le même sélecteur en !important.
+   Sans le Ctrl+Shift+R (vider le cache navigateur), le
+   changement peut ne pas être visible même si le CSS est correct.
+*/
+
+.md-typeset .admonition,
+.md-typeset details {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+}
+
+
+/* ===============================================================
+   6. BLOCS DÉPLIABLES <details> — style de base
+   ===============================================================
+   Ces règles s'appliquent à TOUS les <details> quelle que soit
+   leur classe (niveau1, niveau2...).
+
+   border-radius = coins arrondis (en pixels ou em)
+   padding = espace intérieur entre le bord et le contenu
+   margin = espace extérieur autour du bloc
+   border: none = supprime la bordure par défaut du navigateur
+   cursor: pointer = affiche la main au survol du summary
+*/
+
+details {
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 1em 0;
+  border: none;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.3em 0;
+}
+
+/* Force l'affichage correct des listes dans details
+   (Material les masque ou les affiche mal sans ces règles) */
+details ul {
+  display: block !important;
+  list-style-type: disc !important;    /* puces rondes */
+  padding-left: 2em !important;
+  margin: 0.5em 0 !important;
+}
+
+details ol {
+  display: block !important;
+  list-style-type: decimal !important; /* numéros 1. 2. 3. */
+  padding-left: 2em !important;
+  margin: 0.5em 0 !important;
+}
+
+details ul li,
+details ol li {
+  display: list-item !important;
+  font-size: 1rem !important;
+  line-height: 1.7 !important;
+  margin: 0.3em 0 !important;
+}
+
+
+/* ===============================================================
+   7. COULEURS DES BLOCS PAR NIVEAU
+   ===============================================================
+   Chaque niveau correspond à une classe CSS à ajouter sur la
+   balise <details> dans le Markdown :
+     <details markdown="1" class="niveau1">
+
+   Le code couleur hexadécimal #RRGGBB définit la couleur :
+   RR = rouge, GG = vert, BB = bleu, chacun de 00 à ff.
+   Les background-color sont volontairement pâles (lisibilité).
+   Les border-left sont plus saturés (repère visuel fort).
+
+   La correspondance niveau/couleur suit les couleurs des titres
+   H1 à H6 définies en section 3.
+*/
+
+/* Niveau 1 — Bleu (correspond à H1) */
+details.niveau1 {
+  background-color: #dbeafe;          /* bleu très pâle */
+  border-left: 4px solid #2563eb;     /* bleu vif */
+}
+
+/* Niveau 2 — Vert (correspond à H2) */
+details.niveau2 {
+  background-color: #dcfce7;          /* vert très pâle */
+  border-left: 4px solid #16a34a;     /* vert vif */
+}
+
+/* Niveau 3 — Rouge doux (correspond à H3) */
+details.niveau3 {
+  background-color: #fee2e2;          /* rouge très pâle */
+  border-left: 4px solid #dc2626;     /* rouge */
+}
+
+/* Niveau 4 — Orange doux (correspond à H4) */
+details.niveau4 {
+  background-color: #ffedd5;          /* orange très pâle */
+  border-left: 4px solid #ea580c;     /* orange */
+}
+
+/* Niveau 5 — Or (correspond à H5) */
+details.niveau5 {
+  background-color: #fef9c3;          /* jaune très pâle */
+  border-left: 4px solid #ca8a04;     /* or/jaune foncé */
+}
+
+/* Niveau 6 — Marron (correspond à H6) */
+details.niveau6 {
+  background-color: #f5f0eb;          /* beige très pâle */
+  border-left: 4px solid #92400e;     /* marron */
+}
+
+
+/*
+=================================================================
+  NOTES POUR REPRISE PAR UNE IA
+=================================================================
+
+  CONTEXTE DU PROJET
+  ------------------
+  Site MkDocs 1.6.1 avec thème Material for MkDocs, déployé sur
+  GitHub Pages à https://nuagerouge00.github.io/Finance-SEG/
+  Dépôt : git@github.com:nuagerouge00/Finance-SEG.git
+  Fichier de config : mkdocs.yml à la racine du projet
+  Ce fichier : docs/stylesheets/custom.css
+
+  SYNTAXE MARKDOWN POUR LES DETAILS
+  -----------------------------------
+  Obligatoire : markdown="1" sur la balise <details>
+  Obligatoire : ligne vide après </summary> et avant </details>
+  Obligatoire : pas d'indentation sur les tirets de liste
+  Les titres ## ne vont pas dans <summary>, texte brut seulement
+
+  Exemple correct :
+    <details markdown="1" class="niveau2">
+    <summary>Titre du bloc</summary>
+
+    Contenu en **Markdown** normal.
+
+    - item 1
+    - item 2
+
+    </details>
+
+  LEÇONS CLÉS SUR MATERIAL FOR MKDOCS
+  -------------------------------------
+  1. Material gonfle html à 125% (137.5% sur grands écrans)
+     → Solution : html { font-size: 100% !important; }
+
+  2. Material traite <details> comme ses "admonitions" et force
+     font-size: .64rem via .md-typeset .admonition, .md-typeset details
+     → Solution : même sélecteur avec font-size: 1rem !important
+
+  3. Les sélecteurs simples (details p, details li...) sont
+     écrasés par Material — il faut préfixer avec .md-typeset
+     → Solution : .md-typeset details p { ... }
+
+  4. Le sélecteur * (étoile) ne fonctionne pas dans details
+     → details * { font-family: inherit } = inefficace
+
+  5. Après modification CSS, toujours faire Ctrl+Shift+R dans
+     le navigateur pour vider le cache et voir les vrais effets
+
+  6. Pour déboguer : clic droit → Inspecter → regarder quelle
+     règle CSS s'applique et si elle est barrée (écrasée)
+     Le sélecteur gagnant est celui le plus en haut dans
+     l'inspecteur qui n'est PAS barré
+
+  7. La configuration mkdocs.yml doit contenir :
+     markdown_extensions:
+       - md_in_html    ← active le Markdown dans les balises HTML
+       - attr_list
+     Sans md_in_html, le contenu des <details> s'affiche en texte brut
+
+  WORKFLOW QUOTIDIEN
+  ------------------
+  mkdocs serve          → serveur local http://127.0.0.1:8000/finance-SEG/
+  git add .             → prépare les fichiers modifiés
+  git commit -m "msg"   → sauvegarde avec message
+  git push              → publie sur GitHub Pages (délai 1-2 min)
+
+=================================================================
+*/
